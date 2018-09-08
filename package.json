@@ -1,0 +1,15 @@
+{
+  "name": "services",
+  "version": "1.0.0",
+  "description": "Servicios para proyecto de práctica interna",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://186.121.251.3/arceus6666/Practica_interna.git"
+  },
+  "author": "Daniel Mendoza - Valeria Aliaga",
+  "license": "ISC"
+}
