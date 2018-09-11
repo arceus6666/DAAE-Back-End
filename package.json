@@ -11,5 +11,8 @@
     "url": "http://186.121.251.3/arceus6666/Practica_interna.git"
   },
   "author": "Daniel Mendoza - Valeria Aliaga",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "mongoose": "^5.2.14"
+  }
 }
