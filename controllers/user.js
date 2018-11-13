@@ -1,16 +1,15 @@
 const User = require('../models/user')
 const service = require('../services')
 
-function register (req, res) {
+function register(req, res) {
   let user = new User({
     email: req.body.email,
-    // check
     code: req.body.code,
     name: req.body.name,
     password: req.body.password,
     registerDate: req.body.registerDate,
     role: req.body.role,
-    lastLogin: req.body.lastLogin
+    lastLogin: Date.now()
   })
 
   user.save((err) => {
@@ -23,7 +22,7 @@ function register (req, res) {
   })
 }
 
-function login (req, res) {
+function login(req, res) {
   let param = req.query.param.split(' ')
   User.find({ email: param[0] }, (err, user) => {
     if (!err) {
@@ -47,7 +46,31 @@ function login (req, res) {
   })
 }
 
-function getById (req, res) {
+function update(req, res) {
+  User.findOne({ _id: req.body._id }, (err, user) => {
+    if (err) {
+      res.send(err)
+    } else {
+      user.email = req.body.email
+      user.code = req.body.code
+      user.name = req.body.name
+      user.password = req.body.password
+      user.registerDate = req.body.registerDate
+      user.role = req.body.role
+      user.lastLogin = req.body.lastLogin
+      user.save((err) => {
+        if (err) {
+          res.status(500).send(err)
+        } else {
+          console.log(user)
+          res.status(200).send({ mensaje: 'Se guardó la informacion', ok: true })
+        }
+      })
+    }
+  })
+}
+
+function getById(req, res) {
   User.findOne({ _id: req.query.param }, (err, user) => {
     if (!err) {
       res.status(200).send(user)
@@ -60,5 +83,6 @@ function getById (req, res) {
 module.exports = {
   register,
   login,
+  update,
   getById
 }
