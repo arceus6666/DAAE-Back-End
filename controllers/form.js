@@ -123,11 +123,11 @@ function deleteByID(req, res) {
 
 module.exports = {
   insertForm,
-  getAll,
   update,
-  deleteByID,
+  getAll,
   getByCategory,
   getBySemester,
   getByCareer,
-  getByStatus
+  getByStatus,
+  deleteByID
 }
