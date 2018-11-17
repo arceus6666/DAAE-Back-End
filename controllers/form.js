@@ -72,15 +72,15 @@ function update(req, res) {
 }
 
 function getBySemester(req, res) {
-  let param = req.query.param + ""
+  let param = req.query.param + ''
   param = param.split(' ')
-  //revisar como llega el parametro
+  // revisar como llega el parametro
   let year = param[0]
   let semester = param[1]
   Form.find({
     registration_date: {
-      $gte: new Date(year + "-" + (semester === 1 ? "01" : "07") + "-01T00:00:00.000Z"),
-      $lt: (semester === 1 ? year + "-07" : year + 1 + "-01") + "-01T00:00:00.000Z"
+      $gte: new Date(year + '-' + (semester === 1 ? '01' : '07') + '-01T00:00:00.000Z'),
+      $lt: (semester === 1 ? year + '-07' : year + 1 + '-01') + '-01T00:00:00.000Z'
     }
   }, (err, forms) => {
     if (err) {

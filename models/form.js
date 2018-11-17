@@ -19,14 +19,14 @@ var formSchema = new Schema({
     default: false,
     url: {
       type: String,
-      default: "",
+      default: '',
       requiered: true
     },
     required: true
   },
   status: {
     type: String,
-    default: "Iniciado",
+    default: 'Iniciado',
     required: true
   },
   career: {
@@ -52,8 +52,7 @@ var formSchema = new Schema({
         requiered: true
       },
       requiered: true
-    },
-    default: false
+    }
   },
   examen_de_suficiencia: {
     type: Boolean,
