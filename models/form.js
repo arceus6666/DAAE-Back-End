@@ -2,18 +2,41 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 var formSchema = new Schema({
+  //tipo
   category: {
     type: String,
     required: true
   },
-  version: {
-    type: Number,
+  //fecha de entrada
+  registration_date: {
+    type: Date,
+    default: Date.now(),
     required: true
   },
-  code: {
+  //fecha de modificacion
+  last_modified: {
+    type: Date,
+    default: Date.now(),
+    requiered: true
+  },
+  //estudiante
+  student_code: {
+    type: Number,
+    unique:true,
+    required: true
+  },
+  //carrera
+  career: {
     type: String,
     required: true
   },
+  //estado
+  status: {
+    type: String,
+    default: 'Iniciado',
+    required: true
+  },
+  //respaldo
   digital: {
     type: Boolean,
     default: false,
@@ -24,17 +47,10 @@ var formSchema = new Schema({
     },
     required: true
   },
-  status: {
+  code: {
     type: String,
-    default: 'Iniciado',
-    required: true
-  },
-  career: {
-    type: String,
-    required: true
-  },
-  student_code: {
-    type: Number,
+    //revisar
+    unique: true,
     required: true
   },
   materia_incompleta: {
@@ -63,14 +79,8 @@ var formSchema = new Schema({
       requiered: true
     }
   },
-  last_modified: {
-    type: Date,
-    default: Date.now(),
-    requiered: true
-  },
-  registration_date: {
-    type: Date,
-    default: Date.now(),
+  version: {
+    type: Number,
     required: true
   }
 })
