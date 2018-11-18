@@ -5,6 +5,7 @@ const cors = require('cors')
 const userApi = require('./routes/user')
 const formApi = require('./routes/form')
 const logApi = require('./routes/log')
+const studentApi = require('./routes/student')
 
 /*
 const xxxApi = requiere('./routes/xxx')
@@ -17,7 +18,8 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cors())
 app.use('/users', userApi)
 app.use('/forms', formApi)
-app.use('logs', logApi)
+app.use('/logs', logApi)
+app.use('/students', studentApi)
 
 /*
 app.use('/xxxs', xxxApi)
