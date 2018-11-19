@@ -80,9 +80,20 @@ function getById(req, res) {
   })
 }
 
+function getAll(req, res) {
+  User.find({}, (err, users) => {
+    if (err) {
+      res.status(500).send(err)
+    } else {
+      res.status(200).send(users)
+    }
+  })
+}
+
 module.exports = {
   register,
   login,
   update,
-  getById
+  getById,
+  getAll
 }
