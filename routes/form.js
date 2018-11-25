@@ -10,6 +10,7 @@ api.get('/category', ctrl.getByCategory)
 api.get('/semester', ctrl.getBySemester)
 api.get('/career', ctrl.getByCareer)
 api.get('/status', ctrl.getByStatus)
+api.get('/search', ctrl.multyGet)
 
 //api.get('/find', ctrl.getById)
 module.exports = api

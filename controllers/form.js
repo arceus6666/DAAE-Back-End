@@ -112,6 +112,15 @@ function getByStatus(req, res) {
   })
 }
 
+function multyGet(req, res) {
+  let param = req.query.param + ''
+  param = param.split(' ')
+  //console.log('///////\n')
+  // [0]=tipo,[1]=status,[2]=career,[3]=date
+  console.log(param)
+  Form.find({})
+}
+
 function deleteByID(req, res) {
   Form.findOneAndRemove({ _id: req.params.id }, (err) => {
     if (err) {
@@ -130,5 +139,6 @@ module.exports = {
   getBySemester,
   getByCareer,
   getByStatus,
+  multyGet,
   deleteByID
 }
