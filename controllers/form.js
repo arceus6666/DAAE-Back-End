@@ -6,6 +6,7 @@ function insertForm(req, res) {
     version: req.body.version,
     code: req.body.code,
     digital: req.body.digital,
+    career:req.body.career,
     status: req.body.status,
     student_code: req.body.student_code,
     materia_incompleta: req.body.materia_incompleta,

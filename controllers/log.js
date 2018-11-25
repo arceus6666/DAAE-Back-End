@@ -2,7 +2,7 @@ const Log = require('../models/log')
 
 function insertLog(req, res) {
   var log = new Log({
-    user: req.body.user,
+    user: req.body.userId,
     message: req.body.message,
     date: Date.now()
   })
