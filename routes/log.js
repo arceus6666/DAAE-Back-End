@@ -3,7 +3,7 @@ const ctrl = require('../controllers/log')
 
 const api = express.Router()
 
-api.post('logs-log', ctrl.insertLog)
-api.get('/logs', ctrl.getAll)
+api.post('/log', ctrl.insertLog)
+api.get('/all', ctrl.getAll)
 
 module.exports = api

@@ -7,6 +7,6 @@ api.post('/register', ctrl.register)
 api.put('/update', ctrl.update)
 api.get('/login', ctrl.login)
 api.get('/find', ctrl.getById)
-api.get('/get-all', ctrl.getAll)
+api.get('/all', ctrl.getAll)
 
 module.exports = api
