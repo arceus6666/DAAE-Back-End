@@ -32,8 +32,8 @@ var formSchema = new Schema({
   },
   //estado
   status: {
-    type: String,
-    default: 'Iniciado',
+    type: Boolean,
+    default: false,
     required: true
   },
   //respaldo
