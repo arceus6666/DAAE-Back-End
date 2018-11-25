@@ -57,13 +57,15 @@ var studentSchema = new Schema({
     ci: {
       number: {
         type: Number,
+        unique: true,
         required: true
       },
       extension: {
         type: String,
         required: true
       },
-      unique: true
+      //unique: true,
+      //required: true
     },
     direction: {
       type: String,
@@ -96,8 +98,8 @@ var studentSchema = new Schema({
       phoneNumber: {
         type: Number,
         required: true
-      },
-      required: true
+      }//,
+      //required: true
     },
     secondTutor: {
       name: {
@@ -122,8 +124,7 @@ var studentSchema = new Schema({
       phoneNumber: {
         type: Number,
         required: true
-      },
-      required: false
+      }
     }
   }
 })

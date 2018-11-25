@@ -15,6 +15,7 @@ var userSchema = new Schema({
     required: true
   },
   name: {
+
     firstName: {
       type: String,
       required: true
@@ -28,6 +29,7 @@ var userSchema = new Schema({
       type: String,
       required: true
     }
+
   },
   password: {
     type: String,

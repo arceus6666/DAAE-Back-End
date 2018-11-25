@@ -5,7 +5,7 @@ const Schema = mongoose.Schema
 
 var logSchema = new Schema({
   user: {
-    type: User,
+    type: [mongoose.model('User').schema],
     required: true
   },
   message: {

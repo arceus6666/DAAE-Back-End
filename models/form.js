@@ -17,7 +17,7 @@ var formSchema = new Schema({
   last_modified: {
     type: Date,
     default: Date.now(),
-    requiered: true
+    required: true
   },
   //estudiante
   student_code: {
@@ -43,7 +43,7 @@ var formSchema = new Schema({
     url: {
       type: String,
       default: '',
-      requiered: true
+      required: true
     },
     required: true
   },
@@ -58,16 +58,16 @@ var formSchema = new Schema({
     default: false,
     materia: {
       type: String,
-      requiered: true
+      required: true
     },
     semestre: {
       type: String,
       times: {
         type: Number,
         default: 0,
-        requiered: true
+        required: true
       },
-      requiered: true
+      required: true
     }
   },
   examen_de_suficiencia: {
@@ -76,7 +76,7 @@ var formSchema = new Schema({
     times: {
       type: Number,
       default: 0,
-      requiered: true
+      required: true
     }
   },
   version: {

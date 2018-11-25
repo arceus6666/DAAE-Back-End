@@ -24,7 +24,7 @@ function register(req, res) {
 
 function login(req, res) {
   let param = req.query.param.split(' ')
-  User.find({ email: param[0] }, (err, user) => {
+  User.find({ code: param[0] }, (err, user) => {
     if (!err) {
       let u = user[0]
       if (u.password === param[1]) {
