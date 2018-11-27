@@ -12,5 +12,5 @@ api.get('/career', ctrl.getByCareer)
 api.get('/status', ctrl.getByStatus)
 api.get('/search', ctrl.multyGet)
 
-//api.get('/find', ctrl.getById)
+// api.get('/find', ctrl.getById)
 module.exports = api

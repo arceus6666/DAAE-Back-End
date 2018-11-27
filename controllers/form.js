@@ -6,7 +6,7 @@ function insertForm(req, res) {
     version: req.body.version,
     code: req.body.code,
     digital: req.body.digital,
-    career:req.body.career,
+    career: req.body.career,
     status: req.body.status,
     student_code: req.body.student_code,
     materia_incompleta: req.body.materia_incompleta,
@@ -118,7 +118,14 @@ function multyGet(req, res) {
   //console.log('///////\n')
   // [0]=tipo,[1]=status,[2]=career,[3]=date
   console.log(param)
-  Form.find({})
+  Form.find({ category: param[0] }, (err, forms) => {
+    if (err) {
+      res.status(500).send(err)
+    } else {
+      console.log(JSON.stringify(forms))
+      res.status(200).send(forms)
+    }
+  })
 }
 
 function deleteByID(req, res) {
