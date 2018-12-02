@@ -22,7 +22,6 @@ var formSchema = new Schema({
   //estudiante
   student_code: {
     type: Number,
-    unique: true,
     required: true
   },
   //carrera

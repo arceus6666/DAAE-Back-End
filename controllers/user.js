@@ -7,7 +7,7 @@ function register(req, res) {
     code: req.body.code,
     name: req.body.name,
     password: req.body.password,
-    registerDate: req.body.registerDate,
+    registerDate: Date.now(),
     role: req.body.role,
     lastLogin: Date.now()
   })
@@ -24,9 +24,12 @@ function register(req, res) {
 
 function login(req, res) {
   let param = req.query.param.split(' ')
-  User.find({ code: param[0] }, (err, user) => {
-    if (!err) {
-      let u = user[0]
+  User.findOne({ code: param[0] }, (err, user) => {
+    console.log(user)
+    if (err || user === null) {
+      res.status(500).send({ message: 'Usuario inexistente.' })
+    } else {
+      let u = user
       if (u.password === param[1]) {
         res.status(200).send({ role: u.role, _id: u._id })
         user.lastLogin = Date.now()
@@ -40,8 +43,6 @@ function login(req, res) {
         console.log('error: ' + err)
         res.status(403).send({ message: 'Contraseña incorrecta' })
       }
-    } else {
-      res.status(500).send({ message: 'Usuario inexistente.' })
     }
   })
 }

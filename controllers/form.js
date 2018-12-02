@@ -3,16 +3,16 @@ const Form = require('../models/form')
 function insertForm(req, res) {
   var form = new Form({
     category: req.body.category,
-    version: req.body.version,
-    code: req.body.code,
-    digital: req.body.digital,
+    registration_date: Date.now(),
+    last_modified: Date.now(),
+    student_code: req.body.student_code,
     career: req.body.career,
     status: req.body.status,
-    student_code: req.body.student_code,
+    digital: req.body.digital,
+    code: req.body.code,
     materia_incompleta: req.body.materia_incompleta,
     examen_de_suficiencia: req.body.examen_de_suficiencia,
-    last_modified: Date.now(),
-    registration_date: Date.now()
+    version: req.body.version
   })
   form.save().then(
     (us) => {
@@ -115,17 +115,203 @@ function getByStatus(req, res) {
 function multyGet(req, res) {
   let param = req.query.param + ''
   param = param.split(' ')
-  //console.log('///////\n')
-  // [0]=tipo,[1]=status,[2]=career,[3]=date
+  // console.log('///////\n')
+  // [0]=type,[1]=status,[2]=career,[3]=date
+  if (param[0] === 'undefined') {
+    param[0] = ''
+  }
+  if (param[1] === 'undefined') {
+    param[1] = ''
+  }
+  if (param[2] === 'undefined') {
+    param[2] = ''
+  }
+  if (param[3] === 'undefined') {
+    param[3] = ''
+  }
+
+  let conditions = {
+    full: param[0] !== '' && param[1] !== '' && param[2] !== '' && param[3] !== '',
+    empty: param[0] === '' && param[1] === '' && param[2] === '' && param[3] === '',
+    typeOnly: param[0] !== '' && param[1] === '' && param[2] === '' && param[3] !== '',
+    statusOnly: param[0] === '' && param[1] !== '' && param[2] === '' && param[3] === '',
+    careerOnly: param[0] === '' && param[1] === '' && param[2] !== '' && param[3] === '',
+    dateOnly: param[0] === '' && param[1] === '' && param[2] === '' && param[3] !== '',
+    typeStatus: param[0] !== '' && param[1] !== '' && param[2] === '' && param[3] === '',
+    typeStatusCareer: param[0] !== '' && param[1] !== '' && param[2] !== '' && param[3] === '',
+    typeStatusDate: param[0] !== '' && param[1] !== '' && param[2] === '' && param[3] !== '',
+    typeCareer: param[0] !== '' && param[1] === '' && param[2] !== '' && param[3] === '',
+    typeCareerDate: param[0] !== '' && param[1] === '' && param[2] !== '' && param[3] !== '',
+    typeDate: param[0] !== '' && param[1] === '' && param[2] === '' && param[3] !== '',
+    statusCareer: param[0] === '' && param[1] !== '' && param[2] !== '' && param[3] === '',
+    statusCareerDate: param[0] === '' && param[1] !== '' && param[2] !== '' && param[3] !== '',
+    statusDate: param[0] === '' && param[1] !== '' && param[2] === '' && param[3] !== '',
+    careerDate: param[0] === '' && param[1] === '' && param[2] !== '' && param[3] !== ''
+  }
+
   console.log(param)
-  Form.find({ category: param[0] }, (err, forms) => {
-    if (err) {
-      res.status(500).send(err)
-    } else {
-      console.log(JSON.stringify(forms))
-      res.status(200).send(forms)
-    }
-  })
+
+  if (conditions.empty) {
+    console.log(1)
+    Form.find({}, (err, forms) => {
+      if (err) {
+        res.status(500).send(err)
+      } else {
+        console.log(forms)
+        res.status(200).send(forms)
+      }
+    })
+  } else if (conditions.full) {
+    console.log(2)
+    Form.find({ category: param[0], status: param[1], career: param[2], registration_date: param[3] }, (err, forms) => {
+      if (err) {
+        res.status(500).send(err)
+      } else {
+        console.log(forms)
+        res.status(200).send(forms)
+      }
+    })
+  } else if (conditions.typeOnly) {
+    console.log(3)
+    Form.find({ category: param[0] }, (err, forms) => {
+      if (err) {
+        res.status(500).send(err)
+      } else {
+        console.log(forms)
+        res.status(200).send(forms)
+      }
+    })
+  } else if (conditions.statusOnly) {
+    console.log(4)
+    Form.find({ status: param[1] }, (err, forms) => {
+      if (err) {
+        res.status(500).send(err)
+      } else {
+        console.log(forms)
+        res.status(200).send(forms)
+      }
+    })
+  } else if (conditions.careerOnly) {
+    console.log(5)
+    Form.find({ career: param[2] }, (err, forms) => {
+      if (err) {
+        res.status(500).send(err)
+      } else {
+        console.log(forms)
+        res.status(200).send(forms)
+      }
+    })
+  } else if (conditions.dateOnly) {
+    console.log(6)
+    Form.find({ registration_date: param[3] }, (err, forms) => {
+      if (err) {
+        res.status(500).send(err)
+      } else {
+        console.log(forms)
+        res.status(200).send(forms)
+      }
+    })
+  } else if (conditions.typeStatus) {
+    console.log(7)
+    Form.find({ category: param[0], status: param[1] }, (err, forms) => {
+      if (err) {
+        res.status(500).send(err)
+      } else {
+        console.log(forms)
+        res.status(200).send(forms)
+      }
+    })
+  } else if (conditions.typeCareer) {
+    console.log(8)
+    Form.find({ category: param[0], career: param[2] }, (err, forms) => {
+      if (err) {
+        res.status(500).send(err)
+      } else {
+        console.log(forms)
+        res.status(200).send(forms)
+      }
+    })
+  } else if (conditions.typeDate) {
+    console.log(9)
+    Form.find({ category: param[0], registration_date: param[3] }, (err, forms) => {
+      if (err) {
+        res.status(500).send(err)
+      } else {
+        console.log(forms)
+        res.status(200).send(forms)
+      }
+    })
+  } else if (conditions.typeStatusCareer) {
+    console.log(10)
+    Form.find({ category: param[0], status: param[1], career: param[2] }, (err, forms) => {
+      if (err) {
+        res.status(500).send(err)
+      } else {
+        console.log(forms)
+        res.status(200).send(forms)
+      }
+    })
+  } else if (conditions.typeStatusDate) {
+    console.log(11)
+    Form.find({ category: param[0], status: param[1], registration_date: param[3] }, (err, forms) => {
+      if (err) {
+        res.status(500).send(err)
+      } else {
+        console.log(forms)
+        res.status(200).send(forms)
+      }
+    })
+  } else if (conditions.typeCareerDate) {
+    console.log(12)
+    Form.find({ category: param[0], career: param[2], registration_date: param[3] }, (err, forms) => {
+      if (err) {
+        res.status(500).send(err)
+      } else {
+        console.log(forms)
+        res.status(200).send(forms)
+      }
+    })
+  } else if (conditions.statusCareer) {
+    console.log(13)
+    Form.find({ status: param[1], career: param[2] }, (err, forms) => {
+      if (err) {
+        res.status(500).send(err)
+      } else {
+        console.log(forms)
+        res.status(200).send(forms)
+      }
+    })
+  } else if (conditions.statusDate) {
+    console.log(14)
+    Form.find({ status: param[1], registration_date: param[3] }, (err, forms) => {
+      if (err) {
+        res.status(500).send(err)
+      } else {
+        console.log(forms)
+        res.status(200).send(forms)
+      }
+    })
+  } else if (conditions.statusCareerDate) {
+    console.log(15)
+    Form.find({ status: param[1], career: param[2], registration_date: param[3] }, (err, forms) => {
+      if (err) {
+        res.status(500).send(err)
+      } else {
+        console.log(forms)
+        res.status(200).send(forms)
+      }
+    })
+  } else if (conditions.careerDate) {
+    console.log(16)
+    Form.find({ career: param[2], registration_date: param[3] }, (err, forms) => {
+      if (err) {
+        res.status(500).send(err)
+      } else {
+        console.log(forms)
+        res.status(200).send(forms)
+      }
+    })
+  }
 }
 
 function deleteByID(req, res) {
