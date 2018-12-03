@@ -1,6 +1,7 @@
 const Form = require('../models/form')
 
 function insertForm(req, res) {
+  console.log(req.body)
   var form = new Form({
     category: req.body.category,
     registration_date: Date.now(),
@@ -19,7 +20,7 @@ function insertForm(req, res) {
       res.send(us)
     },
     (err) => {
-      res.send(err)
+      res.status(500).send(err)
     }
   )
 }

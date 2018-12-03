@@ -37,14 +37,15 @@ var formSchema = new Schema({
   },
   //respaldo
   digital: {
-    type: Boolean,
-    default: false,
     url: {
       type: String,
-      default: '',
-      required: true
+      default: ''
     },
-    required: true
+    have: {
+      type: Boolean,
+      default: false,
+      required: true
+    }
   },
   code: {
     type: String,
