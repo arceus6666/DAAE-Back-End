@@ -164,7 +164,7 @@ function multyGet(req, res) {
     })
   } else if (conditions.full) {
     console.log(2)
-    Form.find({ category: param[0], status: param[1], career: param[2], registration_date: param[3] }, (err, forms) => {
+    Form.find({ category: param[0], status: param[1], career: param[2], registration_date: new Date(param[3]) }, (err, forms) => {
       if (err) {
         res.status(500).send(err)
       } else {
@@ -204,7 +204,9 @@ function multyGet(req, res) {
     })
   } else if (conditions.dateOnly) {
     console.log(6)
-    Form.find({ registration_date: param[3] }, (err, forms) => {
+    let d = new Date(param[3])
+    d.setDate(d.getDate() + 1)
+    Form.find({ registration_date: { $gte: new Date(param[3]), $lt: d } }, (err, forms) => {
       if (err) {
         res.status(500).send(err)
       } else {
@@ -234,7 +236,9 @@ function multyGet(req, res) {
     })
   } else if (conditions.typeDate) {
     console.log(9)
-    Form.find({ category: param[0], registration_date: param[3] }, (err, forms) => {
+    let d = new Date(param[3])
+    d.setDate(d.getDate() + 1)
+    Form.find({ category: param[0], registration_date: { $gte: new Date(param[3]), $lt: d } }, (err, forms) => {
       if (err) {
         res.status(500).send(err)
       } else {
@@ -254,7 +258,9 @@ function multyGet(req, res) {
     })
   } else if (conditions.typeStatusDate) {
     console.log(11)
-    Form.find({ category: param[0], status: param[1], registration_date: param[3] }, (err, forms) => {
+    let d = new Date(param[3])
+    d.setDate(d.getDate() + 1)
+    Form.find({ category: param[0], status: param[1], registration_date: { $gte: new Date(param[3]), $lt: d } }, (err, forms) => {
       if (err) {
         res.status(500).send(err)
       } else {
@@ -264,7 +270,9 @@ function multyGet(req, res) {
     })
   } else if (conditions.typeCareerDate) {
     console.log(12)
-    Form.find({ category: param[0], career: param[2], registration_date: param[3] }, (err, forms) => {
+    let d = new Date(param[3])
+    d.setDate(d.getDate() + 1)
+    Form.find({ category: param[0], career: param[2], registration_date: { $gte: new Date(param[3]), $lt: d } }, (err, forms) => {
       if (err) {
         res.status(500).send(err)
       } else {
@@ -284,7 +292,9 @@ function multyGet(req, res) {
     })
   } else if (conditions.statusDate) {
     console.log(14)
-    Form.find({ status: param[1], registration_date: param[3] }, (err, forms) => {
+    let d = new Date(param[3])
+    d.setDate(d.getDate() + 1)
+    Form.find({ status: param[1], registration_date: { $gte: new Date(param[3]), $lt: d } }, (err, forms) => {
       if (err) {
         res.status(500).send(err)
       } else {
@@ -294,7 +304,9 @@ function multyGet(req, res) {
     })
   } else if (conditions.statusCareerDate) {
     console.log(15)
-    Form.find({ status: param[1], career: param[2], registration_date: param[3] }, (err, forms) => {
+    let d = new Date(param[3])
+    d.setDate(d.getDate() + 1)
+    Form.find({ status: param[1], career: param[2], registration_date: { $gte: new Date(param[3]), $lt: d } }, (err, forms) => {
       if (err) {
         res.status(500).send(err)
       } else {
@@ -304,7 +316,9 @@ function multyGet(req, res) {
     })
   } else if (conditions.careerDate) {
     console.log(16)
-    Form.find({ career: param[2], registration_date: param[3] }, (err, forms) => {
+    let d = new Date(param[3])
+    d.setDate(d.getDate() + 1)
+    Form.find({ career: param[2], registration_date: { $gte: new Date(param[3]), $lt: d } }, (err, forms) => {
       if (err) {
         res.status(500).send(err)
       } else {
